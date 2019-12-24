@@ -10,6 +10,7 @@ class App extends React.Component {
     return (
     <div className='container'>
       <Popular />
+      <hr/>
       <Hello 
         name={"MYK"}
         authed
