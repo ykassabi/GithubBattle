@@ -9,7 +9,7 @@ import {
 
 function NavBar ({selected, onUpdateLanguague}){
 
-const languages = ['All', 'JavaScript', 'Ruby', 'Python', 'Go', 'Dart'];
+const languages = ['All', 'Ruby', 'Rails', "JavaScript",'Python', 'Go', 'Dart'];
 
     return (
 
@@ -36,7 +36,7 @@ export default class Popular extends React.Component{
 
         this.state = {
             currentLanguage: 'All',
-            repos: null,
+            repos: {},
             errorMsg: null
         }
 
@@ -48,22 +48,32 @@ export default class Popular extends React.Component{
         this.setState({
             currentLanguage,
             errorMsg: null,
-            repos: null
         })
-        fetchPopularRepos(currentLanguage)
-        .then(repos => this.setState({
-            repos, 
-            errorMsg:null
+        if(!this.state.repos[currentLanguage]){
+            fetchPopularRepos(currentLanguage)
+                    .then((data) => {
+                        this.setState(({ repos }) => ({
+                            repos: {
+                                        ...repos,
+                                        [currentLanguage]: data
+                                    }
+                        }))
+                    })
+            .catch(()=>{
+                this.setState({errorMsg: 'Sorry, Failed to fetch Repos!'})
             })
-        )
-        .catch(()=>{
-            this.setState({errorMsg: 'Sorry, Failed to fetch Repos!'})
-        })
+        }
     }
 
 
 isLoading() {
-    return this.state.repos === null && this.state.error === null 
+    const {
+        currentLanguage,
+        repos,
+        error
+    } = this.state
+
+    return !repos[currentLanguage] && error === null
 }
 
 
@@ -86,11 +96,10 @@ componentDidMount(){
                 {this.isLoading() && <h2> LOADING, Patience please ....</h2>}   
                 {errorMsg && {errorMsg}}
 
-                 {
-                     repos && <pre > {
-                         JSON.stringify(repos, null, 2)
-                     } </pre>
-                     }
+                    {
+                        repos[currentLanguage] && <pre> {
+                            JSON.stringify(repos[currentLanguage], null, 2)
+                        } </pre>}
             </React.Fragment>
         )
     }
