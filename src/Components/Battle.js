@@ -39,7 +39,7 @@ class PlayerInput extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            name:' '
+            name:''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -196,14 +196,13 @@ export default class Battle extends React.Component {
                                 playerTwo
                             }
                             label = 'Player One'
-                            onReset = {
-                                () => this.handleReset('playerOne')
+                            onReset = {() => this.handleReset('playerTwo')
                             }
                             />
                             }
                         </div>
                             
-                            {playerOne && playerTwo && (
+                            { playerOne && playerTwo && (
                                 <button
                                 className='btn dark-btn btn-space'
                                 onClick={() => this.setState({battle: true})}
