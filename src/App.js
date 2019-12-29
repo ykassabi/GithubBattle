@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Hello from './Hello';
 import Popular from './Components/Popular';
+import Battle from './Components/Battle';
 
 class App extends React.Component {
   
@@ -9,7 +10,7 @@ class App extends React.Component {
   render(){
     return (
     <div className='container'>
-      <Popular />
+      <Battle />
       <hr/>
       <Hello 
         name={"MYK"}

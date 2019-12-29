@@ -51,7 +51,7 @@ function ReposGrid({ repos }) {
         const { login, avatar_url } = owner;
 
         return (
-            <li key={html_url} className="repo bg-light">
+            <li key={html_url} className="card bg-light">
             <h4 className="header-lg center-text">#{index + 1}</h4>
             <img
                 className="avatar"
@@ -157,7 +157,7 @@ componentDidMount(){
             />
 
             {this.isLoading() && <h2> LOADING, Patience please ....</h2>}
-            {errorMsg && { errorMsg }}
+            {errorMsg && <p className='center-text error'> { errorMsg } </p>}
 
             {repos[currentLanguage] && (
                 <ReposGrid repos={repos[currentLanguage]} />
