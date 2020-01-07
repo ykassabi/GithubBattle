@@ -11,6 +11,7 @@ import {
     FaExclamationTriangle
 } from "react-icons/fa";
 import Card from './Card'
+import Loading from './Loading';
 
 
 
@@ -151,7 +152,7 @@ componentDidMount(){
             onUpdateLanguague={this.updateLanguageNavBar}
             />
 
-            {this.isLoading() && <h2> LOADING, Patience please ....</h2>}
+            {this.isLoading() && <Loading text="Patience while feching Repos" />}
             {errorMsg && <p className='center-text error'> { errorMsg } </p>}
 
             {repos[currentLanguage] && (
